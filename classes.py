@@ -12,5 +12,8 @@ class account:
         self.balance = balance
     
 
-        
-
+class transaction:
+    def __init__(self, transaction_id, amount, action):
+        self.transaction_id = transaction_id
+        self.amount = amount
+        self.action = action
