@@ -11,13 +11,7 @@ bank_list.append(customer(2, 'Mig', 0))
 
 #print(bank_list)
 
-#user_input = int(input('Please input your bank id : '))
 # Check validity of Bank ID
-valid = False
-
-def options():
-    action_input = input('What would you like to do - See Transactions / Withdraw / Deposit / Transfer Funds : ')   
-
 def check_validity(user_input):
     for i in range(len(bank_list)):
         if user_input == bank_list[i].bank_id:
@@ -26,7 +20,7 @@ def check_validity(user_input):
             return valid
     return False
 
-
+valid = False 
 while valid == False:
     user_input = int(input('Please input your bank id : '))
     valid = check_validity(user_input)
