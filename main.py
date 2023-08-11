@@ -1,5 +1,4 @@
 from classes import account, customer
-from functions import transact
 
 #customer_list = []
 bank_list = []
@@ -32,6 +31,7 @@ def transact(amount, action, bank_id, target_bank_id):
                 bank_list[i].balance -= amount
                 print('after')
                 print(bank_list[i].balance)
+        #transactions.append
     elif action == 'deposit':
         #deposit
         for i in range(len(bank_list)):
@@ -45,12 +45,18 @@ def transact(amount, action, bank_id, target_bank_id):
         #transfer
         for i in range(len(bank_list)):
             if bank_id == bank_list[i].bank_id:
-                for i in range(len(bank_list)):
-                    print('before:')
-                    print(bank_list[i].balance)
-                    bank_list[i].balance += amount
-                    print('after')
-                    print(bank_list[i].balance)
+                for j in range(len(bank_list)):
+                    if target_bank_id == bank_list[j].bank_id:
+                        print('sender before:')
+                        print(bank_list[i].balance)
+                        bank_list[i].balance -= amount
+                        print('sender after:')
+                        print(bank_list[i].balance)
+                        print('receiver before:')
+                        print(bank_list[j].balance)
+                        bank_list[j].balance += amount
+                        print('receiver after:')
+                        print(bank_list[j].balance)
     else:
         print('Invalid input')
 
