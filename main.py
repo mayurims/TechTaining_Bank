@@ -34,10 +34,25 @@ def transact(amount, action, bank_id, target_bank_id):
                 print(bank_list[i].balance)
     elif action == 'deposit':
         #deposit
-        print('deposit')
-    else:
+        for i in range(len(bank_list)):
+            if bank_id == bank_list[i].bank_id:
+                print('before:')
+                print(bank_list[i].balance)
+                bank_list[i].balance += amount
+                print('after')
+                print(bank_list[i].balance)
+    elif action == 'transfer':
         #transfer
-        print('none')
+        for i in range(len(bank_list)):
+            if bank_id == bank_list[i].bank_id:
+                for i in range(len(bank_list)):
+                    print('before:')
+                    print(bank_list[i].balance)
+                    bank_list[i].balance += amount
+                    print('after')
+                    print(bank_list[i].balance)
+    else:
+        print('Invalid input')
 
 valid = False 
 while valid == False:
