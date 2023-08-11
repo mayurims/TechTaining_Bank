@@ -15,7 +15,7 @@ bank_list.append(customer(2, 'Mig', 100))
 def check_validity(user_input):
     for i in range(len(bank_list)):
         if user_input == bank_list[i].bank_id:
-            print('Correct ID')
+            #print('Correct ID')
             valid = True
             return valid
     return False
@@ -77,7 +77,7 @@ while valid == False:
     valid = check_validity(user_input)
     if valid: 
         action_input = input('What would you like to do - See Transactions / Withdraw / Deposit / Transfer Funds : ')   
-        if (action_input != 'See Transactions' and action_input != 'Transfer'):
+        if (action_input == 'withdraw' or action_input == 'deposit'):
             amount = int(input(f'Please enter the amount you want to {action_input} : '))
             # Check if there is sufficient amount
             if check_amt(amount, user_input, action_input):
