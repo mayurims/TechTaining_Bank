@@ -1,4 +1,4 @@
-class account_details:
+class account:
     #account_type = 'Savings'
     def __init__(self, bank_id, user_name ):
         self.bank_id = bank_id
