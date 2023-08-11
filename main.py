@@ -1,6 +1,7 @@
 from classes import account, customer
 from functions import transact, check_amt
 
+
 #customer_list = []
 bank_list = []
 transactions = []
