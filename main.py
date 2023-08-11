@@ -5,8 +5,8 @@ from functions import transact
 bank_list = []
 transactions = []
 
-bank_list.append(customer(1, 'Mayuri', 0))
-bank_list.append(customer(2, 'Mig', 0))
+bank_list.append(customer(1, 'Mayuri', 100))
+bank_list.append(customer(2, 'Mig', 100))
 
 # transactions.append(transactions(1, 100, 'withdraw'))
 
@@ -20,6 +20,24 @@ def check_validity(user_input):
             valid = True
             return valid
     return False
+
+def transact(amount, action, bank_id, target_bank_id):
+    #validate here or in outer function
+    if action ==  'withdraw':
+        #withdraw
+        for i in range(len(bank_list)):
+            if bank_id == bank_list[i].bank_id:
+                print('before:')
+                print(bank_list[i].balance)
+                bank_list[i].balance -= amount
+                print('after')
+                print(bank_list[i].balance)
+    elif action == 'deposit':
+        #deposit
+        print('deposit')
+    else:
+        #transfer
+        print('none')
 
 valid = False 
 while valid == False:
