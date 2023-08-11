@@ -1,4 +1,5 @@
 from classes import account, customer
+from functions import 
 
 #customer_list = []
 bank_list = []
@@ -26,6 +27,11 @@ while valid == False:
     valid = check_validity(user_input)
     if valid: 
            action_input = input('What would you like to do - See Transactions / Withdraw / Deposit / Transfer Funds : ')   
+           if action_input != 'See Transactions' and action_input != 'Transfer Funds':
+                amount = int(input(f'Please enter the amount you want to {action_input} : '))
+                transact(amount, action_input, user_input, '')
+                # Check if i can withdraw that amount
+                # Action of withdrawing
     else: 
     # If Bank ID is incorrect
     #if valid == False:
