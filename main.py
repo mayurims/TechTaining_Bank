@@ -1,5 +1,5 @@
 from classes import account, customer
-from functions import 
+from functions import transact, check_amt
 
 #customer_list = []
 bank_list = []
@@ -26,12 +26,19 @@ while valid == False:
     user_input = int(input('Please input your bank id : '))
     valid = check_validity(user_input)
     if valid: 
-           action_input = input('What would you like to do - See Transactions / Withdraw / Deposit / Transfer Funds : ')   
-           if action_input != 'See Transactions' and action_input != 'Transfer Funds':
-                amount = int(input(f'Please enter the amount you want to {action_input} : '))
-                transact(amount, action_input, user_input, '')
+        action_input = input('What would you like to do - See Transactions / Withdraw / Deposit / Transfer Funds : ')   
+        if (action_input != 'See Transactions' and action_input != 'Transfer Funds'):
+            amount = int(input(f'Please enter the amount you want to {action_input} : '))
+            # Check if there is sufficient amount
+            if check_amt(amount, user_input, action_input):
+                print('You can continue')
+            else:
+                print('You have insufficient Fund')
+                #transact(amount, action_input, user_input, '')
                 # Check if i can withdraw that amount
                 # Action of withdrawing
+        else:
+            print('False')
     else: 
     # If Bank ID is incorrect
     #if valid == False:
