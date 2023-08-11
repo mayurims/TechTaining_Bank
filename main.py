@@ -1,5 +1,4 @@
 from classes import account, customer
-from functions import transact, check_amt
 
 
 #customer_list = []
@@ -23,10 +22,10 @@ def check_validity(user_input):
     return False
 
 def check_amt(amount, bank_id, action):
-    if action == 'withdraw' or 'Transfer Funds':
-        for i in range(len(bank_id)):
-            if bank_id == bank_id[i].bank_id:
-                if amount > bank_id[i].balance:
+    if action == 'withdraw' or action == 'Transfer Funds':
+        for i in range(len(bank_list)):
+            if bank_id == bank_list[i].bank_id:
+                if amount < bank_list[i].balance:
                     return True
         return False
     else:
@@ -72,16 +71,27 @@ while valid == False:
     valid = check_validity(user_input)
     if valid: 
         action_input = input('What would you like to do - See Transactions / Withdraw / Deposit / Transfer Funds : ')   
-        if (action_input != 'See Transactions' and action_input != 'Transfer Funds'):
+        if (action_input != 'See Transactions' and action_input != 'Transfer'):
             amount = int(input(f'Please enter the amount you want to {action_input} : '))
             # Check if there is sufficient amount
             if check_amt(amount, user_input, action_input):
                 print('You can continue')
+                # Transact the amount
+                transact(amount, action_input, user_input, '')
             else:
                 print('You have insufficient Fund')
-                #transact(amount, action_input, user_input, '')
-                # Check if i can withdraw that amount
-                # Action of withdrawing
+        elif (action_input == 'transfer') :
+            amount = int(input(f'Please enter the amount you want to {action_input} : '))
+            # Check if there is sufficient amount
+            if check_amt(amount, user_input, action_input):
+                account_id = int(input('Please enter account number to transfer to : '))
+                if check_validity(account_id):
+                    # Transact the amount
+                    transact(amount, action_input, user_input, account_id)
+                else:
+                    print('Incorrect Account ID')
+            else:
+                print('You have insufficient Fund')
         else:
             print('False')
     else: 
