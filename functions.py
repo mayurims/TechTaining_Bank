@@ -24,6 +24,12 @@ class functions:
                 self.balance -= self.amount
 
 def transact(amount, action, bank_id, target_bank_id):
+    #validate here or in outer function
     if action ==  'withdraw':
         #withdraw
-    elif action ==
+        selected_account =
+        account.balance -= amount
+    elif action == 'deposit':
+        #deposit
+    else:
+        #transfer
