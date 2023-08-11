@@ -20,6 +20,17 @@ def check_validity(user_input):
             return valid
     return False
 
+def check_amt(amount, bank_id, action):
+    if action == 'withdraw' or action == 'Transfer Funds':
+        for i in range(len(bank_list)):
+            if bank_id == bank_list[i].bank_id:
+                if amount < bank_list[i].balance:
+                    return True
+        return False
+    else:
+        return True
+
+
 def transact(amount, action, bank_id, target_bank_id):
     #validate here or in outer function
     if action ==  'withdraw':
@@ -65,12 +76,30 @@ while valid == False:
     user_input = int(input('Please input your bank id : '))
     valid = check_validity(user_input)
     if valid: 
-           action_input = input('What would you like to do - See Transactions / Withdraw / Deposit / Transfer Funds : ')   
-           if action_input != 'See Transactions' and action_input != 'Transfer Funds':
-                amount = int(input(f'Please enter the amount you want to {action_input} : '))
+        action_input = input('What would you like to do - See Transactions / Withdraw / Deposit / Transfer Funds : ')   
+        if (action_input != 'See Transactions' and action_input != 'Transfer'):
+            amount = int(input(f'Please enter the amount you want to {action_input} : '))
+            # Check if there is sufficient amount
+            if check_amt(amount, user_input, action_input):
+                print('You can continue')
+                # Transact the amount
                 transact(amount, action_input, user_input, '')
-                # Check if i can withdraw that amount
-                # Action of withdrawing
+            else:
+                print('You have insufficient Fund')
+        elif (action_input == 'transfer') :
+            amount = int(input(f'Please enter the amount you want to {action_input} : '))
+            # Check if there is sufficient amount
+            if check_amt(amount, user_input, action_input):
+                account_id = int(input('Please enter account number to transfer to : '))
+                if check_validity(account_id):
+                    # Transact the amount
+                    transact(amount, action_input, user_input, account_id)
+                else:
+                    print('Incorrect Account ID')
+            else:
+                print('You have insufficient Fund')
+        else:
+            print('False')
     else: 
     # If Bank ID is incorrect
     #if valid == False:
