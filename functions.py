@@ -1,3 +1,5 @@
+import classes
+import main
 
 transactions = []
 
@@ -21,3 +23,7 @@ class functions:
                 # transfer process
                 self.balance -= self.amount
 
+def transact(amount, action, bank_id, target_bank_id):
+    if action ==  'withdraw':
+        #withdraw
+    elif action ==
