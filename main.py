@@ -1,5 +1,5 @@
 from classes import account, customer
-from functions import 
+from functions import transact
 
 #customer_list = []
 bank_list = []
