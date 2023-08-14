@@ -29,15 +29,14 @@ def check_amt(amount, bank_id, action):
 def transid_gen():
     num = 1
     if len(transactions) == 0:
-        print(1)
         return 1
     for i in range(len(transactions)):
         if num == transactions[i].transaction_id:
             num += 1
-    print(num)
     return num
 
 def see_transact(bank_id):
+    trans_display.clear()
     counter = 0
     for i in reversed(range(0,len(transactions))):
         if (bank_id == transactions[i].bank_id and counter <= 10):
@@ -62,11 +61,8 @@ def transact(amount, action, bank_id, target_bank_id):
         #withdraw
         for i in range(len(bank_list)):
             if bank_id == bank_list[i].bank_id:
-                print('before:')
-                print(bank_list[i].balance)
                 bank_list[i].balance -= amount
-                print('after')
-                print(bank_list[i].balance)
+                print('Current Balance: '+str(bank_list[i].balance))
                 transactions.append(transaction(transid_gen(), bank_list[i].bank_id, '', amount, 'withdraw', bank_list[i].balance))
 
         #transactions.append
@@ -74,11 +70,8 @@ def transact(amount, action, bank_id, target_bank_id):
         #deposit
         for i in range(len(bank_list)):
             if bank_id == bank_list[i].bank_id:
-                print('before:')
-                print(bank_list[i].balance)
                 bank_list[i].balance += amount
-                print('after')
-                print(bank_list[i].balance)
+                print('Current Balance: ' + str(bank_list[i].balance))
                 transactions.append(transaction(transid_gen(), bank_list[i].bank_id, '', amount, 'deposit', bank_list[i].balance))
     elif action == 'transfer':
         #transfer
@@ -86,17 +79,11 @@ def transact(amount, action, bank_id, target_bank_id):
             if bank_id == bank_list[i].bank_id:
                 for j in range(len(bank_list)):
                     if target_bank_id == bank_list[j].bank_id:
-                        print('sender before:')
-                        print(bank_list[i].balance)
-                        bank_list[i].balance -= amount
-                        print('sender after:')
-                        print(bank_list[i].balance)
-                        print('receiver before:')
-                        print(bank_list[j].balance)
-                        bank_list[j].balance += amount
-                        print('receiver after:')
-                        print(bank_list[j].balance)
+                        print('Current Balance: ' + str(bank_list[i].balance))
                         transactions.append(transaction(transid_gen(), bank_list[i].bank_id, bank_list[j].bank_id, amount, 'transfer', bank_list[i].balance))
+                        transactions.append(
+                            transaction(transid_gen(), bank_list[j].bank_id, bank_list[i].bank_id, amount, 'transfer',
+                                        bank_list[j].balance))
 
     else:
         print('Invalid input')
