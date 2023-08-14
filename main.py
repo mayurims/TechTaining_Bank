@@ -1,4 +1,4 @@
-from classes import account, customer
+from classes import account, customer, transaction
 import random
 
 #customer_list = []
@@ -32,11 +32,14 @@ def check_amt(amount, bank_id, action):
         return True
 
 def transid_gen():
-    num = 0
-    while num in list(transactions.transaction_id):
-        num = random.randint(0,999999)
+    num = 1
+    if len(transactions) == 0:
+        return 1
+    for i in range(len(transactions)):
+        if num == transactions[i].transaction_id:
+            num += 1
+    print(num)
     return num
-
 
 def transact(amount, action, bank_id, target_bank_id):
     #validate here or in outer function
@@ -98,7 +101,7 @@ while valid == False:
         elif (action_input == 'transfer') :
             amount = int(input(f'Please enter the amount you want to {action_input} : '))
             # Check if there is sufficient amount
-            if check_amt(amount, user_input.lower(), action_input):
+            if check_amt(amount, user_input, action_input):
                 account_id = int(input('Please enter account number to transfer to : '))
                 while check_validity(account_id) == False:
                     print('Incorrect Account ID')
