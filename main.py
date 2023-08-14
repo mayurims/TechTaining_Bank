@@ -5,8 +5,10 @@ import random
 bank_list = []
 transactions = []
 
-bank_list.append(customer(1, 'Mayuri', 100))
-bank_list.append(customer(2, 'Mig', 100))
+bank_list.append(customer(1, 'Mayuri', 1000))
+bank_list.append(customer(2, 'Mig', 350))
+bank_list.append(customer(3, 'Timothee', 400))
+bank_list.append(customer(4, 'Mig_the_annoying_person', 10))
 
 # transactions.append(transactions(1, 100, 'withdraw'))
 
