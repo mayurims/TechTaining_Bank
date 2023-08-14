@@ -1,3 +1,6 @@
+from datetime import date
+
+class customer:
     def __init__(self, bank_id, user_name, balance):
         self.bank_id = bank_id
         self.user_name = user_name
