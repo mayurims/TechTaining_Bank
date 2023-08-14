@@ -5,6 +5,12 @@ from tabulate import tabulate
 #customer_list = []
 bank_list = []
 transactions = []
+
+bank_list.append(customer(1, 'Mayuri', 1000))
+bank_list.append(customer(2, 'Mig', 350))
+bank_list.append(customer(3, 'Timothee', 400))
+bank_list.append(customer(4, 'Mig_the_annoying_person', 10))
+
 trans_display = []
 
 # Check validity of Bank ID
