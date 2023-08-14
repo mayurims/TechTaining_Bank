@@ -1,4 +1,5 @@
 from classes import account, customer
+import random
 
 #customer_list = []
 bank_list = []
@@ -30,6 +31,12 @@ def check_amt(amount, bank_id, action):
     else:
         return True
 
+def transid_gen():
+    num = 0
+    while num in list(transactions.transaction_id):
+        num = random.randint(0,999999)
+    return num
+
 
 def transact(amount, action, bank_id, target_bank_id):
     #validate here or in outer function
@@ -42,6 +49,7 @@ def transact(amount, action, bank_id, target_bank_id):
                 bank_list[i].balance -= amount
                 print('after')
                 print(bank_list[i].balance)
+                transactions.append(transaction(transid_gen(), amount, 'withdraw'))
 
         #transactions.append
     elif action == 'deposit':
