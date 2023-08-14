@@ -42,6 +42,7 @@ def transact(amount, action, bank_id, target_bank_id):
                 bank_list[i].balance -= amount
                 print('after')
                 print(bank_list[i].balance)
+
         #transactions.append
     elif action == 'deposit':
         #deposit

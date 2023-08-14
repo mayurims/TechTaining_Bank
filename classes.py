@@ -1,4 +1,3 @@
-class customer: 
     def __init__(self, bank_id, user_name, balance):
         self.bank_id = bank_id
         self.user_name = user_name
@@ -17,3 +16,4 @@ class transaction:
         self.transaction_id = transaction_id
         self.amount = amount
         self.action = action
+        self.date = date.today()
