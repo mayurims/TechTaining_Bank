@@ -5,12 +5,6 @@ from tabulate import tabulate
 #customer_list = []
 bank_list = []
 transactions = []
-
-bank_list.append(customer(1, 'Mayuri', 1000))
-bank_list.append(customer(2, 'Mig', 350))
-bank_list.append(customer(3, 'Timothee', 400))
-bank_list.append(customer(4, 'Mig_the_annoying_person', 10))
-
 trans_display = []
 
 # Check validity of Bank ID
@@ -85,6 +79,8 @@ def transact(amount, action, bank_id, target_bank_id):
             if bank_id == bank_list[i].bank_id:
                 for j in range(len(bank_list)):
                     if target_bank_id == bank_list[j].bank_id:
+                        bank_list[i].balance -= amount
+                        bank_list[j].balance += amount
                         print('Current Balance: ' + str(bank_list[i].balance))
                         transactions.append(transaction(transid_gen(), bank_list[i].bank_id, bank_list[j].bank_id, amount, 'transfer', bank_list[i].balance))
                         transactions.append(
@@ -116,11 +112,10 @@ while valid == False:
             amount = int(input(f'Please enter the amount you want to {action_input} : '))
             # Check if there is sufficient amount
             if check_amt(amount, user_input, action_input):
-                print('You can continue')
                 # Transact the amount
                 transact(amount, action_input, user_input, '')
             else:
-                print('You have insufficient Fund')
+                print('You have insufficient funds')
         elif (action_input == 'transfer') :
             amount = int(input(f'Please enter the amount you want to {action_input} : '))
             # Check if there is sufficient amount
