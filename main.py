@@ -59,46 +59,67 @@ def transact(amount, action, bank_id, target_bank_id):
     #validate here or in outer function
     if action ==  'withdraw':
         #withdraw
-        for i in range(len(bank_list)):
-            if bank_id == bank_list[i].bank_id:
-                bank_list[i].balance -= amount
-                print('Current Balance: '+str(bank_list[i].balance))
-                transactions.append(transaction(transid_gen(), bank_list[i].bank_id, '', amount, 'withdraw', bank_list[i].balance))
+        # for i in range(len(bank_list)):
+        #     if bank_id == bank_list[i].bank_id:
+        #         bank_list[i].balance -= amount
+        #         print('Current Balance: '+str(bank_list[i].balance))
+        #         transactions.append(transaction(transid_gen(), bank_list[i].bank_id, '', amount, 'withdraw', bank_list[i].balance))
+        query = update_account = """
+                UPDATE account
+                SET balance = balance - """+str(amount)+"""
+                WHERE bank_id = """+str(bank_id)+"""
+            """
 
         #transactions.append
     elif action == 'deposit':
         #deposit
-        for i in range(len(bank_list)):
-            if bank_id == bank_list[i].bank_id:
-                bank_list[i].balance += amount
-                print('Current Balance: ' + str(bank_list[i].balance))
-                transactions.append(transaction(transid_gen(), bank_list[i].bank_id, '', amount, 'deposit', bank_list[i].balance))
+        # for i in range(len(bank_list)):
+        #     if bank_id == bank_list[i].bank_id:
+        #         bank_list[i].balance += amount
+        #         print('Current Balance: ' + str(bank_list[i].balance))
+        #         transactions.append(transaction(transid_gen(), bank_list[i].bank_id, '', amount, 'deposit', bank_list[i].balance))
+        query = """
+                UPDATE account
+                SET balance = balance + """ + str(amount) + """
+                WHERE bank_id = """ + str(bank_id) + """
+            """
     elif action == 'transfer':
         #transfer
-        for i in range(len(bank_list)):
-            if bank_id == bank_list[i].bank_id:
-                for j in range(len(bank_list)):
-                    if target_bank_id == bank_list[j].bank_id:
-                        bank_list[i].balance -= amount
-                        bank_list[j].balance += amount
-                        print('Current Balance: ' + str(bank_list[i].balance))
-                        transactions.append(transaction(transid_gen(), bank_list[i].bank_id, bank_list[j].bank_id, amount, 'transfer', bank_list[i].balance))
-                        transactions.append(
-                            transaction(transid_gen(), bank_list[j].bank_id, bank_list[i].bank_id, amount, 'transfer',
-                                        bank_list[j].balance))
+        # for i in range(len(bank_list)):
+        #     if bank_id == bank_list[i].bank_id:
+        #         for j in range(len(bank_list)):
+        #             if target_bank_id == bank_list[j].bank_id:
+        #                 bank_list[i].balance -= amount
+        #                 bank_list[j].balance += amount
+        #                 print('Current Balance: ' + str(bank_list[i].balance))
+        #                 transactions.append(transaction(transid_gen(), bank_list[i].bank_id, bank_list[j].bank_id, amount, 'transfer', bank_list[i].balance))
+        #                 transactions.append(
+        #                     transaction(transid_gen(), bank_list[j].bank_id, bank_list[i].bank_id, amount, 'transfer',
+        #                                 bank_list[j].balance))
+        query = """
+                UPDATE account
+                SET balance = balance - """ + str(amount) + """
+                WHERE bank_id = """ + str(bank_id) + """
+            """
+
+        query = """
+                UPDATE account
+                SET balance = balance + """+str(amount)+"""
+                WHERE bank_id = """+str(target_bank_id)+"""
+            """
 
     else:
         print('Invalid input')
 
 # Adding the Database
-bank_list.append(customer(1, 'Mayuri', 1000))
-bank_list.append(customer(2, 'Mig', 350))
-bank_list.append(customer(3, 'Timothee', 400))
-bank_list.append(customer(4, 'Mig_the_annoying_person', 10))
+# bank_list.append(customer(1, 'Mayuri', 1000))
+# bank_list.append(customer(2, 'Mig', 350))
+# bank_list.append(customer(3, 'Timothee', 400))
+# bank_list.append(customer(4, 'Mig_the_annoying_person', 10))
 
-transactions.append(transaction(transid_gen(), 1, '', 100, 'withdraw', 100))
-transactions.append(transaction(transid_gen(), 1, '', 200, 'withdraw', 200))
-transactions.append(transaction(transid_gen(), 2, '', 50, 'deposit', 50))
+# transactions.append(transaction(transid_gen(), 1, '', 100, 'withdraw', 100))
+# transactions.append(transaction(transid_gen(), 1, '', 200, 'withdraw', 200))
+# transactions.append(transaction(transid_gen(), 2, '', 50, 'deposit', 50))
 
 valid = False
 
